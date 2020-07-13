@@ -1,0 +1,290 @@
+pgAdmin4:
+
+
+             SELECT customerid, customernname, contactname, address, city, postalcode, country
+	FROM public.customer;
+	
+	select * from customer;
+	
+	SELECT DISTINCT Country FROM Customer;
+	
+	SELECT * FROM Customer WHERE Country='Usa';
+	
+	SELECT * FROM Customer ORDER BY Country ASC;
+
+
+
+             DELETE FROM Customer WHERE ContactName='Antonio';
+	
+	select * from customer;
+	
+	INSERT INTO Customer (CustomerID, ContactName, Address, City, PostalCode, Country)
+             VALUES (5,'Antonio', 'Tom', '4006 high st', 11190,'USA');
+	
+	select * from customer;
+	
+	SELECT * FROM Customer WHERE City NOT LIKE '%';
+	
+	SELECT * FROM customer WHERE customerID Between 1 and 2; 
+
+
+             SELECT payment_id, customer_id, staff_id, rental_id, amount, payment_date
+	FROM public.payment;
+	
+	select payment_id, rental_id from payment 
+	where rental_id = (Select Max (rental_id) from payment)
+	order by rental_id desc
+	limit 5;
+
+
+
+
+
+
+
+
+
+
+Terminal:
+
+
+
+postgres=# \list
+                                         List of databases
+           Name            |    Owner    | Encoding | Collate | Ctype |      Access privileges      
+---------------------------+-------------+----------+---------+-------+-----------------------------
+ dvdrental                 | imranrashid | UTF8     | C       | C     | 
+ mydb                      | imranrashid | UTF8     | C       | C     | 
+ postgres                  | imranrashid | UTF8     | C       | C     | 
+ super_awesome_application | imranrashid | UTF8     | C       | C     | 
+ template0                 | imranrashid | UTF8     | C       | C     | =c/imranrashid             +
+                           |             |          |         |       | imranrashid=CTc/imranrashid
+ template1                 | imranrashid | UTF8     | C       | C     | =c/imranrashid             +
+                           |             |          |         |       | imranrashid=CTc/imranrashid
+(6 rows)
+
+postgres=# \du
+                                    List of roles
+  Role name  |                         Attributes                         | Member of 
+-------------+------------------------------------------------------------+-----------
+ b2002u1     | Superuser, Create DB                                       | {}
+ imranrashid | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ postgres    | Superuser, Create role, Create DB                          | {}
+
+postgres=# CREATE ROLE b2002u2 WITH LOGIN SUPERUSER CREATEDB CONNECTION LIMIT - 1 PASSWORD 'B2002U2' ;
+CREATE ROLE
+postgres=# \du
+                                    List of roles
+  Role name  |                         Attributes                         | Member of 
+-------------+------------------------------------------------------------+-----------
+ b2002u1     | Superuser, Create DB                                       | {}
+ b2002u2     | Superuser, Create DB                                       | {}
+ imranrashid | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ postgres    | Superuser, Create role, Create DB                          | {}
+
+postgres=# \dt
+Did not find any relations.
+postgres=# \list
+                                         List of databases
+           Name            |    Owner    | Encoding | Collate | Ctype |      Access privileges      
+---------------------------+-------------+----------+---------+-------+-----------------------------
+ dvdrental                 | imranrashid | UTF8     | C       | C     | 
+ mydb                      | imranrashid | UTF8     | C       | C     | 
+ postgres                  | imranrashid | UTF8     | C       | C     | 
+ super_awesome_application | imranrashid | UTF8     | C       | C     | 
+ template0                 | imranrashid | UTF8     | C       | C     | =c/imranrashid             +
+                           |             |          |         |       | imranrashid=CTc/imranrashid
+ template1                 | imranrashid | UTF8     | C       | C     | =c/imranrashid             +
+                           |             |          |         |       | imranrashid=CTc/imranrashid
+(6 rows)
+
+postgres=# \c mydb
+You are now connected to database "mydb" as user "imranrashid".
+mydb=# \dt
+           List of relations
+ Schema |  Name   | Type  |    Owner    
+--------+---------+-------+-------------
+ public | mytable | table | imranrashid
+(1 row)
+
+mydb=# \c dvdrental
+You are now connected to database "dvdrental" as user "imranrashid".
+dvdrental=# \dt
+             List of relations
+ Schema |     Name      | Type  |  Owner   
+--------+---------------+-------+----------
+ public | actor         | table | postgres
+ public | address       | table | postgres
+ public | category      | table | postgres
+ public | city          | table | postgres
+ public | country       | table | postgres
+ public | customer      | table | postgres
+ public | film          | table | postgres
+ public | film_actor    | table | postgres
+ public | film_category | table | postgres
+ public | inventory     | table | postgres
+ public | language      | table | postgres
+ public | payment       | table | postgres
+ public | rental        | table | postgres
+ public | staff         | table | postgres
+ public | store         | table | postgres
+(15 rows)
+
+dvdrental=# ;
+dvdrental=# create database mydb2
+dvdrental-# ;
+CREATE DATABASE
+dvdrental=# \dt
+             List of relations
+ Schema |     Name      | Type  |  Owner   
+--------+---------------+-------+----------
+ public | actor         | table | postgres
+ public | address       | table | postgres
+ public | category      | table | postgres
+ public | city          | table | postgres
+ public | country       | table | postgres
+ public | customer      | table | postgres
+ public | film          | table | postgres
+ public | film_actor    | table | postgres
+ public | film_category | table | postgres
+ public | inventory     | table | postgres
+ public | language      | table | postgres
+ public | payment       | table | postgres
+ public | rental        | table | postgres
+ public | staff         | table | postgres
+ public | store         | table | postgres
+(15 rows)
+
+dvdrental=# \dn
+   List of schemas
+  Name  |    Owner    
+--------+-------------
+ public | imranrashid
+(1 row)
+
+dvdrental=# \list
+                                         List of databases
+           Name            |    Owner    | Encoding | Collate | Ctype |      Access privileges      
+---------------------------+-------------+----------+---------+-------+-----------------------------
+ dvdrental                 | imranrashid | UTF8     | C       | C     | 
+ mydb                      | imranrashid | UTF8     | C       | C     | 
+ mydb2                     | imranrashid | UTF8     | C       | C     | 
+ postgres                  | imranrashid | UTF8     | C       | C     | 
+ super_awesome_application | imranrashid | UTF8     | C       | C     | 
+ template0                 | imranrashid | UTF8     | C       | C     | =c/imranrashid             +
+                           |             |          |         |       | imranrashid=CTc/imranrashid
+ template1                 | imranrashid | UTF8     | C       | C     | =c/imranrashid             +
+                           |             |          |         |       | imranrashid=CTc/imranrashid
+(7 rows)
+
+dvdrental=# \c mydb2
+You are now connected to database "mydb2" as user "imranrashid".
+mydb2=# CREATE TABLE mytable (id integer, name VARCHAR (500), address VARCHAR (500));
+CREATE TABLE
+mydb2=# \dt
+           List of relations
+ Schema |  Name   | Type  |    Owner    
+--------+---------+-------+-------------
+ public | mytable | table | imranrashid
+(1 row)
+
+mydb2=# \du
+                                    List of roles
+  Role name  |                         Attributes                         | Member of 
+-------------+------------------------------------------------------------+-----------
+ b2002u1     | Superuser, Create DB                                       | {}
+ b2002u2     | Superuser, Create DB                                       | {}
+ imranrashid | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ postgres    | Superuser, Create role, Create DB                          | {}
+
+mydb2=# INSERT INTO mytable ( id,name,address) VALUES (301, 'jhony', 203 park ave);
+ERROR:  syntax error at or near "park"
+LINE 1: ...able ( id,name,address) VALUES (301, 'jhony', 203 park ave);
+                                                             ^
+mydb2=# INSERT INTO mytable ( id,name,address) VALUES (301, 'jhony','203 park ave');
+INSERT 0 1
+mydb2=# INSERT INTO mytable (id, name, address) VALUES ( 302, 'nick', '305 regent st');
+INSERT 0 1
+mydb2=# \dt
+           List of relations
+ Schema |  Name   | Type  |    Owner    
+--------+---------+-------+-------------
+ public | mytable | table | imranrashid
+(1 row)
+
+mydb2=# /list
+mydb2-# ;
+ERROR:  syntax error at or near "/"
+LINE 1: /list
+        ^
+mydb2=# \d
+           List of relations
+ Schema |  Name   | Type  |    Owner    
+--------+---------+-------+-------------
+ public | mytable | table | imranrashid
+(1 row)
+
+mydb2=# \c mytable
+FATAL:  database "mytable" does not exist
+Previous connection kept
+mydb2=# \list
+                                         List of databases
+           Name            |    Owner    | Encoding | Collate | Ctype |      Access privileges      
+---------------------------+-------------+----------+---------+-------+-----------------------------
+ dvdrental                 | imranrashid | UTF8     | C       | C     | 
+ mydb                      | imranrashid | UTF8     | C       | C     | 
+ mydb2                     | imranrashid | UTF8     | C       | C     | 
+ postgres                  | imranrashid | UTF8     | C       | C     | 
+ super_awesome_application | imranrashid | UTF8     | C       | C     | 
+ template0                 | imranrashid | UTF8     | C       | C     | =c/imranrashid             +
+                           |             |          |         |       | imranrashid=CTc/imranrashid
+ template1                 | imranrashid | UTF8     | C       | C     | =c/imranrashid             +
+                           |             |          |         |       | imranrashid=CTc/imranrashid
+(7 rows)
+
+mydb2=# SELECT * FROM mytable;
+ id  | name  |    address    
+-----+-------+---------------
+ 301 | jhony | 203 park ave
+ 302 | nick  | 305 regent st
+(2 rows)
+
+mydb2=# \c dvdrental
+You are now connected to database "dvdrental" as user "imranrashid".
+dvdrental=# select inventory_id, film_id from inventory
+dvdrental-# where film_id = (select MAX (film_id)
+dvdrental(# 
+
+dvdrental(# 
+
+dvdrental(# 
+
+dvdrental(# 
+
+dvdrental(# from inventory)
+dvdrental-# 
+
+dvdrental-# 
+
+dvdrental-# 
+
+dvdrental-# 
+
+dvdrental-# order by inventory_id desc
+dvdrental-# 
+
+dvdrental-# 
+
+dvdrental-# 
+
+dvdrental-# 
+
+dvdrental-# limit 3;;
+ inventory_id | film_id 
+--------------+---------
+         4581 |    1000
+         4580 |    1000
+         4579 |    1000
+(3 rows)
+
+
